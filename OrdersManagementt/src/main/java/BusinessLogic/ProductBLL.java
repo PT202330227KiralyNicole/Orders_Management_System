@@ -3,6 +3,7 @@ package BusinessLogic;
 import DataAccess.ProductDAO;
 import Model.Product;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -102,6 +103,31 @@ public class ProductBLL {
             throw new NoSuchElementException("The product was not found!!");
         }
         p.updateStock(quantity);
+    }
+//    public DefaultTableModel getTableDataProduct(){
+//        DefaultTableModel model = productDAO.getTableData(findAllProducts());
+//        if(model == null){
+//            throw new NoSuchElementException("No products");
+//        }
+//        return model;
+//
+//    }
+
+    public Object[][] getTableDataProduct(){
+        Object[][] model = productDAO.getTableData(findAllProducts());
+        if(model == null){
+            throw new NoSuchElementException("No products");
+        }
+        return model;
+
+    }
+    public String[] getTableDataProductHeader(){
+        String[] cl = productDAO.getTableDataHeader(findAllProducts());
+        if(cl == null){
+            throw new NoSuchElementException("No products");
+        }
+        return cl;
+
     }
 
 

@@ -5,6 +5,8 @@ import BusinessLogic.ProductBLL;
 import Model.Client;
 import Model.Orders;
 import Model.Product;
+
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
@@ -239,27 +241,10 @@ public class Controller {
 
     public void setTableValuesClient(ClientView clientView, ClientBLL clientBLL){
         clientView.clearTable();
-        List<Client> clients = clientBLL.findAllClients();
-        if(!clients.isEmpty()){
-            Field[] fields = clients.get(0).getClass().getDeclaredFields();
-            String[] header = new String[fields.length];
-            for(int i = 0; i < clients.size(); i++){
-                for(int j = 0; j < fields.length; j++){
-                    try{
-                        Field field = fields[j];
-                        field.setAccessible(true);
-                        Object value = field.get(clients.get(i));
-                        clientView.setDataTable(value, i+1, j);
-                        if(i == 0){
-                           header[j] = fields[j].getName();
-                            clientView.setDataTable(header[j], i, j);
-                        }
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+        DefaultTableModel model = new DefaultTableModel(clientBLL.getTableDataClient(), clientBLL.getTableDataClientHeader());
+
+      //  DefaultTableModel model = clientBLL.getTableDataClient();
+        clientView.setDataTable(model);
     }
 
     /**
@@ -269,29 +254,9 @@ public class Controller {
      */
 
     public void setTableValuesProduct(ProductView productView, ProductBLL productBLL){
-        this.productView.clearTable();
-        List<Product> products = productBLL.findAllProducts();
-        if(!products.isEmpty()){
-            Field[] fields = products.get(0).getClass().getDeclaredFields();
-            String[] header = new String[fields.length];
-            for(int i = 0; i < products.size(); i++){
-                for(int j = 0; j < fields.length; j++){
-                    try{
-                        Field field = fields[j];
-                        field.setAccessible(true);
-                        Object value = field.get(products.get(i));
-                        productView.setDataTable(value, i+1, j);
-                        if(i == 0){
-                            header[j] = fields[j].getName();
-                            productView.setDataTable(header[j], i, j);
-                        }
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+        DefaultTableModel model = new DefaultTableModel(productBLL.getTableDataProduct(), productBLL.getTableDataProductHeader());
+        productView.setDataTable(model);
 
-        }
     }
 
     /**
@@ -300,26 +265,8 @@ public class Controller {
      * @param orderBLL
      */
     public void setTableValuesOrder(OrderView orderView, OrderBLL orderBLL){
-        List<Orders> orders = orderBLL.findAllOrders();
-        if(!orders.isEmpty()){
-            Field[] fields = orders.get(0).getClass().getDeclaredFields();
-            String[] header = new String[fields.length];
-            for(int i = 0; i < orders.size(); i++){
-                for(int j = 0; j < fields.length; j++){
-                    try{
-                        Field field = fields[j];
-                        field.setAccessible(true);
-                        Object value = field.get(orders.get(i));
-                        orderView.setDataTable(value, i+1, j);
-                        if(i == 0){
-                            header[j] = fields[j].getName();
-                            orderView.setDataTable(header[j], i, j);
-                        }
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+       DefaultTableModel model = new DefaultTableModel(orderBLL.getTableDataOrder(), orderBLL.getTableDataOrderHeader());
+        orderView.setDataTable(model);
+
     }
 }

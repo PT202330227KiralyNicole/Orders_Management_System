@@ -3,6 +3,7 @@ package BusinessLogic;
 import DataAccess.ClientDAO;
 import Model.Client;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -91,6 +92,35 @@ public class ClientBLL {
             throw new NoSuchElementException("Can t delete the client " +id);
         }
         return cl;
+    }
+
+//    public DefaultTableModel getTableDataClient(){
+//       DefaultTableModel model = clientDAO.getTableData(findAllClients());
+//       if(model == null){
+//           throw new NoSuchElementException("No clients");
+//       }
+//        return model;
+//
+//    }
+
+
+    public Object[][] getTableDataClient(){
+        Object[][] model = clientDAO.getTableData(findAllClients());
+        if(model == null){
+            throw new NoSuchElementException("No clients");
+        }
+        return model;
+
+    }
+
+    public String[] getTableDataClientHeader(){
+        String[] cl = clientDAO.getTableDataHeader(findAllClients());
+
+        if(cl == null){
+            throw new NoSuchElementException("No clients");
+        }
+        return cl;
+
     }
 
 }

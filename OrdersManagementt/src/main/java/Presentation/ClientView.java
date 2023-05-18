@@ -36,25 +36,25 @@ public class ClientView extends JFrame{
     public ClientView() {
 
        this.clientTable = new JTable();
-        clientTable.setModel(new DefaultTableModel(
-                new Object[][]{
-                         {null,null,null,null,null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-
-
-
-                }, new String[]{
-                "New", "New", "New", "New", "New"
-
-        }
-        ));
+//        clientTable.setModel(new DefaultTableModel(
+//                new Object[][]{
+//                         {null,null,null,null,null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//                        {null, null, null, null, null},
+//
+//
+//
+//                }, new String[]{
+//                "New", "New", "New", "New", "New"
+//
+//        }
+//        ));
 
         this.addButton = new JButton(" ADD CLIENT ");
         addButton.setBackground(Color.BLACK);
@@ -118,11 +118,13 @@ public class ClientView extends JFrame{
         panelUp.add(p1);
         panelUp.add(p2);
 
+        JScrollPane scrollPane = new JScrollPane(clientTable);
+
         JPanel panell = new JPanel();
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
         panell.add(panelUp);
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
-        panell.add(this.clientTable);
+        panell.add(scrollPane);
 
 
         JPanel verticalContent1 = new JPanel();
@@ -205,12 +207,9 @@ public class ClientView extends JFrame{
 
     /**
      * <p>Metoda este folosita pentru a seta in tabel obiectul cu atributele sale</p>
-     * @param o
-     * @param row
-     * @param col
      */
-    public void setDataTable(Object o, int row, int col){
-        this.clientTable.getModel().setValueAt(o, row, col);
+    public void setDataTable(DefaultTableModel model){
+        this.clientTable.setModel(model);
     }
 
     /**

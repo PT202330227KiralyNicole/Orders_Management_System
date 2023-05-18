@@ -7,6 +7,7 @@ import Model.Bill;
 import Model.Orders;
 import Model.Product;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -116,5 +117,30 @@ public class OrderBLL {
             throw new NoSuchElementException("Can t delete the order " + id);
         }
         return o  ;
+    }
+//    public DefaultTableModel getTableDataOrder(){
+//        DefaultTableModel model = orderDAO.getTableData(findAllOrders());
+//        if(model == null){
+//            throw new NoSuchElementException("No orders");
+//        }
+//        return model;
+//
+//    }
+
+    public Object[][] getTableDataOrder(){
+        Object[][] model = orderDAO.getTableData(findAllOrders());
+        if(model == null){
+            throw new NoSuchElementException("No orders");
+        }
+        return model;
+
+    }
+    public String[] getTableDataOrderHeader(){
+        String[] cl = orderDAO.getTableDataHeader(findAllOrders());
+        if(cl == null){
+            throw new NoSuchElementException("No orders");
+        }
+        return cl;
+
     }
 }

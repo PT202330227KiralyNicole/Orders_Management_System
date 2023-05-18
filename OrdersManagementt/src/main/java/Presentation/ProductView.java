@@ -31,26 +31,26 @@ public class ProductView extends JFrame {
      */
     public ProductView() {
         this.productTable = new JTable();
-        productTable.setModel(new DefaultTableModel(
-                new Object[][]{
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-                        {null,null,null,null},
-
-                }, new String[]{
-                "New", "New", "New", "New"
-        }
-        ));
+//        productTable.setModel(new DefaultTableModel(
+//                new Object[][]{
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//                        {null,null,null,null},
+//
+//                }, new String[]{
+//                "New", "New", "New", "New"
+//        }
+//        ));
 
         this.addButton = new JButton(" ADD PRODUCT ");
         addButton.setBackground(Color.BLACK);
@@ -101,6 +101,8 @@ public class ProductView extends JFrame {
         p2.add(Box.createRigidArea(new Dimension(0, 35)));
         p2.add(this.stockTextField);
 
+        JScrollPane scrollPane = new JScrollPane(productTable);
+
         JPanel panelUp = new JPanel();
         panelUp.add(p1);
         panelUp.add(p2);
@@ -108,7 +110,7 @@ public class ProductView extends JFrame {
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
         panell.add(panelUp);
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
-        panell.add(this.productTable);
+        panell.add(scrollPane);
 
         JPanel verticalContent1 = new JPanel();
         verticalContent1.setLayout(new BoxLayout(verticalContent1, BoxLayout.Y_AXIS));
@@ -188,14 +190,10 @@ public class ProductView extends JFrame {
 
     /**
      * <p>Metoda este folosita pentru a seta in tabel obiectul cu atributele sale</p>
-     * @param o
-     * @param row
-     * @param col
      */
-    public void setDataTable(Object o, int row, int col){
-        this.productTable.setValueAt(o, row, col);
-    }
-    /**
+    public void setDataTable(DefaultTableModel model){
+        this.productTable.setModel(model);
+    }    /**
      * <p>Metoda este folosita pentru a reseta tabelul cu elementele pe null</p>
      */
     public void clearTable(){

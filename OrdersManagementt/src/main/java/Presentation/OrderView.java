@@ -99,6 +99,8 @@ public class OrderView extends JFrame {
         p2.add(this.dateTextField);
         p2.add(Box.createRigidArea(new Dimension(0, 35)));
         p2.add(this.quantityTextField);
+        JScrollPane scrollPane = new JScrollPane(orderTable);
+
 
         JPanel panelUp = new JPanel();
         panelUp.add(p1);
@@ -107,7 +109,7 @@ public class OrderView extends JFrame {
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
         panell.add(panelUp);
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
-        panell.add(this.orderTable);
+        panell.add(scrollPane);
 
 
         JPanel auxiliar = new JPanel();
@@ -149,14 +151,15 @@ public class OrderView extends JFrame {
 
     /**
      * <p>Metoda este folosita pentru a seta in tabel obiectul cu atributele sale</p>
-     * @param o
-     * @param row
-     * @param col
      */
-    public void setDataTable(Object o, int row, int col){
-        this.orderTable.setValueAt(o, row, col);
+    public void setDataTable(DefaultTableModel model){
+        this.orderTable.setModel(model);
     }
 
+//    public void setHeader(Object o, int row, int col){
+//        this.orderTable.setValueAt(o,row,col);
+//
+//    }
     /**
      * <p>Metoda returneaza id-ul comenzii, introdus sub forma de String</p>
      * @return
